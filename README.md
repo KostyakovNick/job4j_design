@@ -1,0 +1,1 @@
+This project implements a Junior level training course
