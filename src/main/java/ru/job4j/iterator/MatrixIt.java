@@ -38,5 +38,4 @@ public class MatrixIt implements Iterator<Integer> {
             System.out.println(it.next());
         }
     }
-
 }
