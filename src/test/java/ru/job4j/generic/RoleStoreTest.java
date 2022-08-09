@@ -78,7 +78,7 @@ class RoleStoreTest {
     void whenReplaceNotOkThenFalse() {
         RoleStore store = new RoleStore();
         store.add(new Role("1", "Руководитель"));
-        boolean rsl = store.replace("2", new Role("10", "Исполнитель"));
+        boolean rsl = store.replace("2", new Role("2", "Исполнитель"));
         assertThat(rsl).isFalse();
     }
 
