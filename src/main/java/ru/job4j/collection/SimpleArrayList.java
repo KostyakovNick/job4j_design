@@ -17,22 +17,31 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     @Override
     public void add(T value) {
         if (size == container.length) {
-            container = Arrays.copyOf(container, container.length * 2);
+            container = grow(container);
         }
         container[size] = value;
         size++;
+        modCount++;
+    }
+
+    private T[] grow(T[] container) {
+        return container.length != 0
+                ? Arrays.copyOf(container, container.length * 2)
+                : Arrays.copyOf(container, 10);
     }
 
     @Override
     public T set(int index, T newValue) {
-        T rsl = container[Objects.checkIndex(index, size)];
+        index = Objects.checkIndex(index, size);
+        T rsl = container[index];
         container[Objects.checkIndex(index, size)] = newValue;
         return rsl;
     }
 
     @Override
     public T remove(int index) {
-        T rsl = container[Objects.checkIndex(index, size)];
+        index = Objects.checkIndex(index, size);
+        T rsl = container[index];
         System.arraycopy(
                 container,
                 index + 1,
@@ -47,7 +56,8 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public T get(int index) {
-        return container[Objects.checkIndex(index, size)];
+        index = Objects.checkIndex(index, size);
+        return container[index];
     }
 
     @Override
@@ -64,6 +74,9 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
             @Override
             public boolean hasNext() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
                 return i < size;
             }
 
@@ -71,9 +84,6 @@ public class SimpleArrayList<T> implements SimpleList<T> {
             public T next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
-                }
-                if (expectedModCount != modCount) {
-                    throw new ConcurrentModificationException();
                 }
                 return container[i++];
             }
