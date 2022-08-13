@@ -34,6 +34,7 @@ class SimpleStackTest {
     void whenPushPushThenPollPoll() {
         stack.pop();
         assertThat(stack.pop()).isEqualTo(1);
-        assertThatThrownBy(stack::pop).isInstanceOf(NoSuchElementException.class);
+        assertThatThrownBy(stack::pop)
+                .isInstanceOf(NoSuchElementException.class);
     }
 }
