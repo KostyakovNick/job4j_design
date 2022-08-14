@@ -1,7 +1,6 @@
 package ru.job4j.collection;
 
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 public class ForwardLinked<T> implements Iterable<T> {
@@ -38,16 +37,16 @@ public class ForwardLinked<T> implements Iterable<T> {
     }
 
     public boolean revert() {
-        if (head == null || head.next == null) {
-            return false;
+        boolean rsl = !(head == null || head.next == null);
+        if (rsl) {
+            Node<T> n = null;
+            while (head != null) {
+                n = new Node<>(head.value, n);
+                head = head.next;
+            }
+            head = n;
         }
-        Node<T> n = null;
-        while (head != null) {
-            n = new Node<>(head.value, n);
-            head = head.next;
-        }
-        head = n;
-        return true;
+        return rsl;
     }
 
     @Override
