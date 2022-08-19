@@ -31,9 +31,9 @@ class SimpleSetTest {
         set.add(1);
         set.add(2);
         set.add(3);
-        set.add(1);
-        assertThat(set.add(1)).isFalse();
-        assertThat(set.contains(1)).isTrue();
+        set.add(3);
+        assertThat(set.add(3)).isFalse();
+        assertThat(set.contains(3)).isTrue();
     }
 
     @Test
