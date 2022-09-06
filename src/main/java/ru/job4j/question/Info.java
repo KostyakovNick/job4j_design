@@ -18,20 +18,20 @@ public class Info {
         return added;
     }
 
-    public void setAdded(int added) {
-        this.added = added;
-    }
-
     public int getChanged() {
         return changed;
     }
 
-    public void setChanged(int changed) {
-        this.changed = changed;
-    }
-
     public int getDeleted() {
         return deleted;
+    }
+
+    public void setAdded(int added) {
+        this.added = added;
+    }
+
+    public void setChanged(int changed) {
+        this.changed = changed;
     }
 
     public void setDeleted(int deleted) {
