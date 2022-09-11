@@ -8,15 +8,15 @@ class RoleStoreTest {
     @Test
     void whenAddAndFindThenRoleNameIsDirector() {
         RoleStore store = new RoleStore();
-        store.add(new Role("1", "Руководитель"));
+        store.add(new Role("1", "Director"));
         Role result = store.findById("1");
-        assertThat(result.getRoleName()).isEqualTo("Руководитель");
+        assertThat(result.getRoleName()).isEqualTo("Director");
     }
 
     @Test
     void whenAddAndFindThenRoleIsNull() {
         RoleStore store = new RoleStore();
-        store.add(new Role("1", "Руководитель"));
+        store.add(new Role("1", "Director"));
         Role result = store.findById("2");
         assertThat(result).isNull();
     }
@@ -24,34 +24,34 @@ class RoleStoreTest {
     @Test
     void whenAddDuplicateAndFindRoleNameIsDirector() {
         RoleStore store = new RoleStore();
-        store.add(new Role("1", "Руководитель"));
-        store.add(new Role("1", "Исполнитель"));
+        store.add(new Role("1", "Director"));
+        store.add(new Role("1", "Subordinated"));
         Role result = store.findById("1");
-        assertThat(result.getRoleName()).isEqualTo("Руководитель");
+        assertThat(result.getRoleName()).isEqualTo("Director");
     }
 
     @Test
     void whenReplaceThenRoleNameIsSubordinated() {
         RoleStore store = new RoleStore();
-        store.add(new Role("1", "Руководитель"));
-        store.replace("1", new Role("1", "Исполнитель"));
+        store.add(new Role("1", "Director"));
+        store.replace("1", new Role("1", "Subordinated"));
         Role result = store.findById("1");
-        assertThat(result.getRoleName()).isEqualTo("Исполнитель");
+        assertThat(result.getRoleName()).isEqualTo("Subordinated");
     }
 
     @Test
     void whenNoReplaceRoleThenNoChangeRoleName() {
         RoleStore store = new RoleStore();
-        store.add(new Role("1", "Руководитель"));
-        store.replace("10", new Role("2", "Исполнитель"));
+        store.add(new Role("1", "Director"));
+        store.replace("10", new Role("2", "Subordinated"));
         Role result = store.findById("1");
-        assertThat(result.getRoleName()).isEqualTo("Руководитель");
+        assertThat(result.getRoleName()).isEqualTo("Director");
     }
 
     @Test
     void whenDeleteRoleThenRoleIsNull() {
         RoleStore store = new RoleStore();
-        store.add(new Role("1", "Руководитель"));
+        store.add(new Role("1", "Director"));
         store.delete("1");
         Role result = store.findById("1");
         assertThat(result).isNull();
@@ -60,32 +60,32 @@ class RoleStoreTest {
     @Test
     void whenNoDeleteRoleThenRoleNameIsDirector() {
         RoleStore store = new RoleStore();
-        store.add(new Role("1", "Руководитель"));
+        store.add(new Role("1", "Director"));
         store.delete("2");
         Role result = store.findById("1");
-        assertThat(result.getRoleName()).isEqualTo("Руководитель");
+        assertThat(result.getRoleName()).isEqualTo("Director");
     }
 
     @Test
     void whenReplaceOkThenTrue() {
         RoleStore store = new RoleStore();
-        store.add(new Role("1", "Руководитель"));
-        boolean rsl = store.replace("1", new Role("1", "Исполнитель"));
+        store.add(new Role("1", "Director"));
+        boolean rsl = store.replace("1", new Role("1", "Subordinated"));
         assertThat(rsl).isTrue();
     }
 
     @Test
     void whenReplaceNotOkThenFalse() {
         RoleStore store = new RoleStore();
-        store.add(new Role("1", "Руководитель"));
-        boolean rsl = store.replace("2", new Role("2", "Исполнитель"));
+        store.add(new Role("1", "Director"));
+        boolean rsl = store.replace("2", new Role("2", "Subordinated"));
         assertThat(rsl).isFalse();
     }
 
     @Test
     void whenDeleteOkThenTrue() {
         RoleStore store = new RoleStore();
-        store.add(new Role("1", "Руководитель"));
+        store.add(new Role("1", "Director"));
         boolean rsl = store.delete("1");
         assertThat(rsl).isTrue();
     }
@@ -93,7 +93,7 @@ class RoleStoreTest {
     @Test
     void whenDeleteNotOkThenFalse() {
         RoleStore store = new RoleStore();
-        store.add(new Role("1", "Руководитель"));
+        store.add(new Role("1", "Director"));
         boolean rsl = store.delete("2");
         assertThat(rsl).isFalse();
     }
