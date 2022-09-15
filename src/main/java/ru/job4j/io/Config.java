@@ -60,11 +60,4 @@ public class Config {
         }
         return out.toString();
     }
-
-    public static void main(String[] args) {
-        String path = "./data/when_value_has_equal_sign.properties";
-        Config config = new Config(path);
-        config.load();
-        System.out.println(config.value("name1"));
-    }
 }
