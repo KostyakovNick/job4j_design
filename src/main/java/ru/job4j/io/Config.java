@@ -19,12 +19,14 @@ public class Config {
         List<String> rsl = new ArrayList<>();
         StringJoiner out = new StringJoiner(System.lineSeparator());
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
-            rsl = read.lines().filter(line -> !line.contains("#") && !line.isEmpty()).collect(Collectors.toList());
+            rsl = read.lines().filter(line -> !line.startsWith("#") && !line.isEmpty()).collect(Collectors.toList());
         } catch (IOException e) {
             e.printStackTrace();
         }
         for (String s : rsl) {
-            if (s.equals("=")) {
+            s = s.trim();
+            int index = s.indexOf("=");
+            if ("=".equals(s)) {
                 throw new IllegalArgumentException(
                         String.format("this line: \"%s\"  does not contain a key and value", s));
             }
@@ -32,7 +34,7 @@ public class Config {
                 throw new IllegalArgumentException(
                         String.format("this line: \"%s\" does not contain a key", s));
             }
-            if (s.indexOf("=") == s.length() - 1) {
+            if (index == s.length() - 1) {
                 throw new IllegalArgumentException(
                         String.format("this line: \"%s\" does not contain a value", s));
             }
@@ -40,7 +42,7 @@ public class Config {
                 throw new IllegalArgumentException(
                         String.format("this line: \"%s\" does not contain the equal sing", s));
             }
-            values.put(s.substring(0, s.indexOf("=")), s.substring(s.indexOf("=") + 1));
+            values.put(s.substring(0, index), s.substring(index + 1));
         }
     }
 
@@ -57,5 +59,12 @@ public class Config {
             e.printStackTrace();
         }
         return out.toString();
+    }
+
+    public static void main(String[] args) {
+        String path = "./data/when_value_has_equal_sign.properties";
+        Config config = new Config(path);
+        config.load();
+        System.out.println(config.value("name1"));
     }
 }
