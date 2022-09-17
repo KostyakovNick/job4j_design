@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class Analizy {
 
-    public void unavailable(String source, String target) {
+    public static void unavailable(String source, String target) {
         try (BufferedReader read = new BufferedReader(new FileReader(source))) {
             List<String> rsl = new ArrayList<>();
             String status = "";
@@ -46,11 +46,4 @@ public class Analizy {
             e.printStackTrace();
         }
     }
-
-    public static void main(String[] args) {
-        String source = "./data/server1.log";
-        String target = "./data/unavailable.csv";
-        Analizy analizy = new Analizy();
-        analizy.unavailable(source, target);
-     }
 }
