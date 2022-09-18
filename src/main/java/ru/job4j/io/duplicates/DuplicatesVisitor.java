@@ -23,7 +23,7 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
             List<Path> tmpPaths = rsl.get(fileProperty);
             tmpPaths.add(file.toAbsolutePath());
             rsl.put(fileProperty, tmpPaths);
-            System.out.printf("%s - %s\n", fileProperty.getName(), fileProperty.getSize());
+            System.out.printf("%s - %.2fMb\n", fileProperty.getName(), (double) fileProperty.getSize() / 1024);
             for (Path p : tmpPaths) {
                 System.out.println(p);
             }
