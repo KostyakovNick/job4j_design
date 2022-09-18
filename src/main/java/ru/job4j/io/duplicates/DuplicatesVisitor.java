@@ -27,9 +27,7 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     }
 
     public static void print() {
-        Iterator<Map.Entry<FileProperty, List<Path>>> itr = rsl.entrySet().iterator();
-        while (itr.hasNext()) {
-            Map.Entry<FileProperty, List<Path>> entry = itr.next();
+        for (Map.Entry<FileProperty, List<Path>> entry : rsl.entrySet()) {
             if (entry.getValue().size() > 1) {
                 System.out.printf("%s - %.2fMb\n", entry.getKey().getName(), (double) entry.getKey().getSize() / 1024);
                 for (Path p : entry.getValue()) {
