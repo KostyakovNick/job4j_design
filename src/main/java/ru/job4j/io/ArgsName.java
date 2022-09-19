@@ -16,37 +16,39 @@ public class ArgsName {
     }
 
     private void parse(String[] args) {
-        if (args.length == 0) {
-            throw new IllegalArgumentException("no args!");
-        }
+
         for (String s : args) {
             s = s.trim();
             int index = s.indexOf("=");
-            if (!s.startsWith("-")) {
-                throw new IllegalArgumentException(
-                        String.format("this arg: \"%s\" does not contain \"-\"", s));
-            }
-            if ("=".equals(s)) {
-                throw new IllegalArgumentException(
-                        String.format("this arg: \"%s\"  does not contain a key and value", s));
-            }
-            if (index == 1) {
-                throw new IllegalArgumentException(
-                        String.format("this arg: \"%s\" does not contain a key", s));
-            }
-            if (index == s.length() - 1) {
-                throw new IllegalArgumentException(
-                        String.format("this arg: \"%s\" does not contain a value", s));
-            }
-            if (!s.contains("=")) {
-                throw new IllegalArgumentException(
-                        String.format("this arg: \"%s\" does not contain the equal sing", s));
-            }
+            check(s);
             values.put(s.substring(1, index), s.substring(index + 1));
         }
     }
 
+    private void check(String s) {
+        int index = s.indexOf("=");
+        if (!s.startsWith("-")) {
+            throw new IllegalArgumentException(
+                    String.format("this arg: \"%s\" does not contain \"-\"", s));
+        }
+        if (index == 1) {
+            throw new IllegalArgumentException(
+                    String.format("this arg: \"%s\" does not contain a key", s));
+        }
+        if (index == s.length() - 1) {
+            throw new IllegalArgumentException(
+                    String.format("this arg: \"%s\" does not contain a value", s));
+        }
+        if (!s.contains("=")) {
+            throw new IllegalArgumentException(
+                    String.format("this arg: \"%s\" does not contain the equal sing", s));
+        }
+    }
+
     public static ArgsName of(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException("no args!");
+        }
         ArgsName names = new ArgsName();
         names.parse(args);
         return names;
