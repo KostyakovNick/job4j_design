@@ -38,7 +38,7 @@ class ArgsNameTest {
     void whenGetNotKey() {
         assertThatThrownBy(() -> ArgsName.of(new String[]{"-=512"}))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("does not contain a key");
+                .hasMessageContaining("no key");
     }
 
     @Test

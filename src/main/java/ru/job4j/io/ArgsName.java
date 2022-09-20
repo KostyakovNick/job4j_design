@@ -20,28 +20,23 @@ public class ArgsName {
         for (String s : args) {
             s = s.trim();
             int index = s.indexOf("=");
-            check(s);
+            check(s, index);
             values.put(s.substring(1, index), s.substring(index + 1));
         }
     }
 
-    private void check(String s) {
-        int index = s.indexOf("=");
+    private void check(String s, int index) {
         if (!s.startsWith("-")) {
             throw new IllegalArgumentException(
                     String.format("this arg: \"%s\" does not contain \"-\"", s));
         }
-        if (index == 1) {
+        if (!(index > 1)) {
             throw new IllegalArgumentException(
-                    String.format("this arg: \"%s\" does not contain a key", s));
+                    String.format("this arg: \"%s\" does not contain the equal sing or no key", s));
         }
         if (index == s.length() - 1) {
             throw new IllegalArgumentException(
                     String.format("this arg: \"%s\" does not contain a value", s));
-        }
-        if (!s.contains("=")) {
-            throw new IllegalArgumentException(
-                    String.format("this arg: \"%s\" does not contain the equal sing", s));
         }
     }
 
