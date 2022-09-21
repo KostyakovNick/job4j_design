@@ -16,7 +16,6 @@ public class ArgsName {
     }
 
     private void parse(String[] args) {
-
         for (String s : args) {
             s = s.trim();
             int index = s.indexOf("=");
@@ -51,7 +50,7 @@ public class ArgsName {
 
     public static void main(String[] args) {
         ArgsName jvm = ArgsName.of(new String[] {"-=512", "-encoding=UTF-8"});
-        //System.out.println(jvm.get("Xmx"));
+        System.out.println(jvm.get("Xmx"));
 
         ArgsName zip = ArgsName.of(new String[] {"-out=project.zip", "-encoding=UTF-8"});
         System.out.println(zip.get("out"));
