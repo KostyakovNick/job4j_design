@@ -1,6 +1,7 @@
 package ru.job4j.io;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -33,8 +34,28 @@ public class Zip {
         }
     }
 
+    private static void checkArgsName(ArgsName argsName) {
+        if (!Files.exists(Path.of(argsName.get("d")))) {
+            throw new IllegalArgumentException(
+                    String.format("this \"%s\" is not a directory or there is no such directory", argsName.get("d")));
+        }
+
+        if (!argsName.get("e").startsWith(".")) {
+            throw new IllegalArgumentException(
+                    String.format("this argument \"%s\" is not an extension or sign \".\" is not specified", argsName.get("e")));
+        }
+        if (!".zip".equals(argsName.get("o").substring(argsName.get("o").indexOf(".")))) {
+            throw new IllegalArgumentException(
+                    String.format("this argument \"%s\" is not an archive name", argsName.get("o")));
+        }
+    }
+
     public static void main(String[] args) throws IOException {
+        if (args.length != 3) {
+            throw new IllegalArgumentException("no args!");
+        }
         ArgsName argsName = ArgsName.of(args);
+        checkArgsName(argsName);
         List<Path> list = Search.search(Paths.get(argsName.get("d")),
                 p -> !p.toFile().getName().endsWith(argsName.get("e")));
         Zip zip = new Zip();
