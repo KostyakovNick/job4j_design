@@ -44,7 +44,7 @@ public class Zip {
             throw new IllegalArgumentException(
                     String.format("this argument \"%s\" is not an extension or sign \".\" is not specified", argsName.get("e")));
         }
-        if (!".zip".equals(argsName.get("o").substring(argsName.get("o").indexOf(".")))) {
+        if (!argsName.get("o").endsWith(".zip")) {
             throw new IllegalArgumentException(
                     String.format("this argument \"%s\" is not an archive name", argsName.get("o")));
         }
