@@ -1,6 +1,7 @@
 package ru.job4j.io;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -54,7 +55,7 @@ public class ConsoleChat {
         }
 
         private void saveLog(List<String> log) {
-            try (PrintWriter pw = new PrintWriter(new FileWriter(path, true))) {
+            try (PrintWriter pw = new PrintWriter(new FileWriter(path, Charset.forName("WINDOWS-1251"), true))) {
                 for (String s : log) {
                     pw.println(s);
                 }
