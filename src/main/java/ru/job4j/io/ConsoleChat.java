@@ -27,14 +27,14 @@ public class ConsoleChat {
             System.out.println(s);
             list.add(s);
             Scanner console = new Scanner(System.in);
-            while (!s.equals(OUT)) {
+            while (!OUT.equals(s)) {
                 System.out.print("User: ");
                 String say = console.nextLine();
                 list.add("User: " + say);
                 if (say.equals(OUT) || say.equals(STOP)) {
                     s = say;
                 }
-                if (!s.equals(OUT) && (!s.equals(STOP) || say.equals(CONTINUE))) {
+                if (!OUT.equals(s) && (!STOP.equals(s) || CONTINUE.equals(say))) {
                     int x = (int) (Math.random() * listBot.size());
                     System.out.println("Bot: " + listBot.get(x));
                     list.add("Bot: " + listBot.get(x));
@@ -47,7 +47,7 @@ public class ConsoleChat {
         private List<String> readPhrases() {
             List<String> rsl = new ArrayList<>();
             try (BufferedReader read = new BufferedReader(new FileReader(this.botAnswers))) {
-                rsl = read.lines().filter(line -> !line.isEmpty()).collect(Collectors.toList());
+                rsl = read.lines().filter(line -> !line.isBlank()).collect(Collectors.toList());
             } catch (IOException e) {
                 e.printStackTrace();
             }
