@@ -47,7 +47,7 @@ public class ConsoleChat {
         private List<String> readPhrases() {
             List<String> rsl = new ArrayList<>();
             try (BufferedReader read = new BufferedReader(new FileReader(this.botAnswers))) {
-                rsl = read.lines().filter(line -> !line.isBlank()).collect(Collectors.toList());
+                rsl = read.lines().filter(line -> !line.isBlank()).toList();
             } catch (IOException e) {
                 e.printStackTrace();
             }
