@@ -8,7 +8,12 @@ public class CSVReader {
 
     public static void handle(ArgsName argsName) {
         List<List<String>> lines = read(argsName);
-        write(lines, index(lines, argsName.get("filter").split(",")), argsName);
+        List<Integer> ind =  index(lines, argsName.get("filter").split(","));
+        if ("stdout".equals(argsName.get("out"))) {
+            console(lines, ind, argsName);
+        } else {
+            write(lines, ind, argsName);
+        }
     }
 
     public static List<Integer> index(List<List<String>> lines, String[] filter) {
@@ -31,6 +36,19 @@ public class CSVReader {
         return lines;
     }
 
+    public static void console(List<List<String>> lines, List<Integer> in, ArgsName argsName) {
+            for (List<String> l :lines) {
+                for (int i = 0; i < in.size(); i++) {
+                    if (i < in.size() - 1) {
+                        System.out.print(l.get(in.get(i)) + ";");
+                    } else {
+                        System.out.print(l.get(in.get(i)));
+                    }
+                }
+                System.out.println();
+            }
+    }
+
     public static void write(List<List<String>> lines, List<Integer> in, ArgsName argsName) {
         try (PrintWriter pw = new PrintWriter(new FileWriter(argsName.get("out"), true))) {
             for (List<String> l :lines) {
@@ -48,18 +66,20 @@ public class CSVReader {
         }
     }
 
-    public static void check(String[] args) {
-
-        if (!args[0].endsWith(".csv")) {
+    public static void check(ArgsName argsName) {
+        if (!argsName.get("path").endsWith(".csv")) {
             throw new IllegalArgumentException("No read File!");
         }
-        if (!args[1].endsWith(";")) {
+        if (!argsName.get("delimiter").equals(";")) {
             throw new IllegalArgumentException("Does not contain the sing \";\"");
         }
-        if (!args[2].endsWith("stdout")) {
+        if (!(argsName.get("out").equals("stdout") || argsName.get("out").endsWith(".csv"))) {
             throw new IllegalArgumentException("No write File");
         }
-        if (!(args[3].contains("name") || args[3].contains("age") || args[3].contains("last_name") || args[3].contains("education"))) {
+        if (!(argsName.get("filter").contains("name")
+                || argsName.get("filter").contains("age")
+                || argsName.get("filter").contains("last_name")
+                || argsName.get("filter").contains("education"))) {
             throw new IllegalArgumentException("No filter");
         }
     }
@@ -68,8 +88,8 @@ public class CSVReader {
         if (args.length != 4) {
             throw new IllegalArgumentException("No arguments!");
         }
-        check(args);
         ArgsName argsName = ArgsName.of(args);
+        check(argsName);
         handle(argsName);
     }
 }
