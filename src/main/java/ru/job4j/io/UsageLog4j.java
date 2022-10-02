@@ -9,10 +9,17 @@ public class UsageLog4j {
     private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
 
     public static void main(String[] args) {
-        LOG.trace("trace message");
-        LOG.debug("debug message");
-        LOG.info("info message");
-        LOG.warn("warn message");
-        LOG.error("error message");
+        byte b = 50;
+        short s = 100;
+        int i = 3000;
+        long l = 10000;
+        float f = 0.5f;
+        double d = 0.7d;
+        boolean bo = true;
+        char c = '\u0000';
+
+
+        LOG.debug("Primitive Data Types : byte - {}, short - {}, int - {}, long - {}, float - {}, double - {}, boolean - {}, char - {}", b, s, i, l, f, d, bo, c);
+
     }
 }
