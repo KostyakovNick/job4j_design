@@ -18,10 +18,8 @@ public class EchoServer {
                         server.close();
                         break;
                     } else if (get.contains("Hello")) {
-                        out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                         out.write("Hello.".getBytes());
                     } else if (get.contains("Any")) {
-                        out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                         out.write("What.".getBytes());
                     }
                     System.out.println(get);
