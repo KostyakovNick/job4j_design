@@ -70,10 +70,10 @@ public class CSVReader {
         if (!argsName.get("path").endsWith(".csv")) {
             throw new IllegalArgumentException("No read File!");
         }
-        if (!argsName.get("delimiter").equals(";")) {
+        if (!";".equals(argsName.get("delimiter"))) {
             throw new IllegalArgumentException("Does not contain the sing \";\"");
         }
-        if (!(argsName.get("out").equals("stdout") || argsName.get("out").endsWith(".csv"))) {
+        if (!("stdout".equals(argsName.get("out")) || argsName.get("out").endsWith(".csv"))) {
             throw new IllegalArgumentException("No write File");
         }
         if (!(argsName.get("filter").contains("name")
