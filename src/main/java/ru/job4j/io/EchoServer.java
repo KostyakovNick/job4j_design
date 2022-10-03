@@ -39,6 +39,5 @@ public class EchoServer {
         } catch (IOException e) {
             LOG.error("Exception in log example", e);
         }
-
     }
 }
