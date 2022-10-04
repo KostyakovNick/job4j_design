@@ -17,7 +17,7 @@ public class Main {
                 "{"
                         + "\"q\":true,"
                         + "\"experience\":6,"
-                        + "\"post\":Engineer,"
+                        + "\"post\":\"Engineer\","
                         + "\"person\":"
                         + "{"
                         + "\"sex\":false,"
