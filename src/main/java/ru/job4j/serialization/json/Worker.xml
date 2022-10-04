@@ -1,0 +1,16 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<worker q="true" experience="6" post="Engineer">
+    <person sex="false" age="40">
+        <contact phone="+ 7 913 052 49 28"/>
+        <statuses>
+            <status>Worker</status>
+            <status>Free</status>
+        </statuses>
+        <sizes>
+            <size>52</size>
+            <size>165</size>
+            <size>42</size>
+            <size>58</size>
+        </sizes>
+    </person>
+</worker>
