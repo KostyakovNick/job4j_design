@@ -11,6 +11,8 @@ public class Person {
     @XmlAttribute
     private boolean sex;
     private int age;
+
+    @XmlElement
     private Contact contact;
 
     @XmlElementWrapper(name = "statuses")
