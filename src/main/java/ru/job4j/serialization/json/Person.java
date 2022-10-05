@@ -2,8 +2,11 @@ package ru.job4j.serialization.json;
 
 import ru.job4j.serialization.java.Contact;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.Arrays;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Person {
     private final boolean sex;
     private final int age;
