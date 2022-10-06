@@ -36,7 +36,6 @@ public class Main {
         final Worker worker = new Worker(true, 6, "Engineer",
                 new Person(false, 40, new Contact(11111, "+7 913 052 49 28"),
                         new String[] {"Worker", "Free"}), new int[] {52, 165, 42, 58});
-
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("q", worker.isQ());
         jsonObject.put("experience", worker.getExperience());

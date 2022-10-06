@@ -41,7 +41,7 @@ public class Worker {
     @Override
     public String toString() {
         return "Worker{"
-                + "q=" + q
+                + " q=" + q
                 + ", experience=" + experience
                 + ", post=" + post
                 + ", person=" + person

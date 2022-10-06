@@ -18,7 +18,6 @@ public class B {
         B b = new B();
         a.setB(b);
         b.setA(a);
-
         System.out.println(new JSONObject(b));
     }
 }
