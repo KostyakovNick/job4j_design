@@ -18,6 +18,26 @@ public class Worker {
         this.size = size;
     }
 
+    public boolean isQ() {
+        return q;
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public String getPost() {
+        return post;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public int[] getSize() {
+        return size;
+    }
+
     @Override
     public String toString() {
         return "Worker{"
