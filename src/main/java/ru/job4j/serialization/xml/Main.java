@@ -11,8 +11,6 @@ public class Main {
         Worker worker = new Worker(true, 6, "Engineer",
                 new Person(false, 40, new Contact("+7 913 052 49 28"),
                         "Worker", "Free"), 52, 165, 42, 58);
-
-        System.out.println(worker);
         JAXBContext context = JAXBContext.newInstance(Worker.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
